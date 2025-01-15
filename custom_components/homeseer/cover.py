@@ -4,12 +4,14 @@ import logging
 
 from homeassistant.components.cover import (
     CoverEntity,
+    CoverEntityFeature,
     ATTR_POSITION,
-    DEVICE_CLASS_BLIND,
-    DEVICE_CLASS_GARAGE,
-    SUPPORT_CLOSE,
-    SUPPORT_OPEN,
-    SUPPORT_SET_POSITION,
+)
+
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorStateClass,
 )
 
 from .const import DOMAIN
@@ -59,12 +61,12 @@ class HomeSeerGarageDoor(HomeSeerCover):
     @property
     def supported_features(self):
         """Return the features supported by the device."""
-        return SUPPORT_OPEN | SUPPORT_CLOSE
+        return CoverEntityFeature.SUPPORT_OPEN | CoverEntityFeature.SUPPORT_CLOSE
 
     @property
     def device_class(self):
         """Return the device class for the device."""
-        return DEVICE_CLASS_GARAGE
+        return SensorDeviceClass.GARAGE
 
     @property
     def is_opening(self):
@@ -88,12 +90,12 @@ class HomeSeerBlind(HomeSeerCover):
     @property
     def supported_features(self):
         """Return the features supported by the device."""
-        return SUPPORT_OPEN | SUPPORT_CLOSE | SUPPORT_SET_POSITION
+        return CoverEntityFeature.SUPPORT_OPEN | CoverEntityFeature.SUPPORT_CLOSE | CoverEntityFeature.SUPPORT_SET_POSITION
 
     @property
     def device_class(self):
         """Return the device class for the device."""
-        return DEVICE_CLASS_BLIND
+        return SensorDeviceClass.BLIND
 
     @property
     def current_cover_position(self):

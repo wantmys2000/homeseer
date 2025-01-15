@@ -168,7 +168,7 @@ class HomeSeerHumiditySensor(HomeSeerValueSensor):
 
     @property
     def device_class(self):
-        return SensorDeviceClass..HUMIDITY
+        return SensorDeviceClass.HUMIDITY
 
 
 class HomeSeerFanStateSensor(HomeSeerStatusSensor):
