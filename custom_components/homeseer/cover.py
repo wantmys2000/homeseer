@@ -6,6 +6,7 @@ from homeassistant.components.cover import (
     CoverEntity,
     CoverEntityFeature,
     ATTR_POSITION,
+    DEVICE_CLASS_GARAGE,
 )
 
 from homeassistant.components.sensor import (
@@ -66,7 +67,7 @@ class HomeSeerGarageDoor(HomeSeerCover):
     @property
     def device_class(self):
         """Return the device class for the device."""
-        return SensorDeviceClass.GARAGE
+        return DEVICE_CLASS_GARAGE
 
     @property
     def is_opening(self):
