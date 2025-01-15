@@ -62,7 +62,7 @@ class HomeSeerGarageDoor(HomeSeerCover):
     @property
     def supported_features(self):
         """Return the features supported by the device."""
-        return CoverEntityFeature.SUPPORT_OPEN | CoverEntityFeature.SUPPORT_CLOSE
+        return CoverEntityFeature.OPEN | CoverEntityFeature.CLOSE
 
     @property
     def device_class(self):
@@ -91,7 +91,7 @@ class HomeSeerBlind(HomeSeerCover):
     @property
     def supported_features(self):
         """Return the features supported by the device."""
-        return CoverEntityFeature.SUPPORT_OPEN | CoverEntityFeature.SUPPORT_CLOSE | CoverEntityFeature.SUPPORT_SET_POSITION
+        return CoverEntityFeature.OPEN | CoverEntityFeature.CLOSE | CoverEntityFeature.SET_POSITION
 
     @property
     def device_class(self):
