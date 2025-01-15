@@ -25,24 +25,22 @@ from libhomeseer import (
     get_uom_from_status,
 )
 
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorStateClass,
+)
 from homeassistant.const import (
-    DEVICE_CLASS_BATTERY,
-    DEVICE_CLASS_CURRENT,
-    DEVICE_CLASS_ENERGY,
-    DEVICE_CLASS_HUMIDITY,
-    DEVICE_CLASS_ILLUMINANCE,
-    DEVICE_CLASS_POWER,
-    DEVICE_CLASS_TEMPERATURE,
-    DEVICE_CLASS_VOLTAGE,
-    ELECTRIC_CURRENT_AMPERE,
-    ENERGY_KILO_WATT_HOUR,
+    EntityCategory,
+    UnitOfDataRate,
+    UnitOfInformation,
+    UnitOfPower,
+    UnitOfTemperature,
+    UnitOfElectricCurrent,
+    UnitOfEnergy,
+    UnitOfElectricPotential,
     LIGHT_LUX,
-    TEMP_CELSIUS,
-    TEMP_FAHRENHEIT,
     PERCENTAGE,
-    POWER_KILO_WATT,
-    POWER_WATT,
-    ELECTRIC_POTENTIAL_VOLT,
 )
 
 from .const import DOMAIN
@@ -95,21 +93,21 @@ class HomeSeerValueSensor(HomeSeerEntity):
         if unit == HS_UNIT_LUX:
             return LIGHT_LUX
         elif unit == HS_UNIT_CELSIUS:
-            return TEMP_CELSIUS
+            return UnitOfTemperature.CELSIUS
         elif unit == HS_UNIT_FAHRENHEIT:
-            return TEMP_FAHRENHEIT
+            return UnitOfTemperature.FAHRENHEIT
         elif unit == HS_UNIT_PERCENTAGE:
             return PERCENTAGE
         elif unit == HS_UNIT_A or unit == HS_UNIT_AMPERES:
-            return ELECTRIC_CURRENT_AMPERE
+            return UnitOfElectricCurrent.AMPERE
         elif unit == HS_UNIT_KW:
-            return POWER_KILO_WATT
+            return UnitOfPower.KILO_WATT
         elif unit == HS_UNIT_KWH:
-            return ENERGY_KILO_WATT_HOUR
+            return UnitOfEnergy.KILO_WATT_HOUR
         elif unit == HS_UNIT_V or unit == HS_UNIT_VOLTS:
-            return ELECTRIC_POTENTIAL_VOLT
+            return UnitOfElectricPotential.VOLT
         elif unit == HS_UNIT_W or unit == HS_UNIT_WATTS:
-            return POWER_WATT
+            return UnitOfPower.WATT
         return None
 
     @property
@@ -117,19 +115,19 @@ class HomeSeerValueSensor(HomeSeerEntity):
         """Return the device class of the device based on the device's unit of measure."""
         unit = get_uom_from_status(self._device.status)
         if unit == HS_UNIT_LUX:
-            return DEVICE_CLASS_ILLUMINANCE
+            return SensorDeviceClass.ILLUMINANCE
         elif unit == HS_UNIT_CELSIUS or unit == HS_UNIT_FAHRENHEIT:
-            return DEVICE_CLASS_TEMPERATURE
+            return SensorDeviceClass.TEMPERATURE
         elif unit == HS_UNIT_A or unit == HS_UNIT_AMPERES:
-            return DEVICE_CLASS_CURRENT
+            return SensorDeviceClass.CURRENT
         elif unit == HS_UNIT_KW:
-            return DEVICE_CLASS_POWER
+            return SensorDeviceClass.POWER
         elif unit == HS_UNIT_KWH:
-            return DEVICE_CLASS_ENERGY
+            return SensorDeviceClass.ENERGY
         elif unit == HS_UNIT_V or unit == HS_UNIT_VOLTS:
-            return DEVICE_CLASS_VOLTAGE
+            return SensorDeviceClass.VOLTAGE
         elif unit == HS_UNIT_W or unit == HS_UNIT_WATTS:
-            return DEVICE_CLASS_POWER
+            return SensorDeviceClass.POWER
         return None
 
 
@@ -138,7 +136,7 @@ class HomeSeerBatterySensor(HomeSeerValueSensor):
 
     @property
     def device_class(self):
-        return DEVICE_CLASS_BATTERY
+        return SensorDeviceClass.BATTERY
 
     @property
     def icon(self):
@@ -170,7 +168,7 @@ class HomeSeerHumiditySensor(HomeSeerValueSensor):
 
     @property
     def device_class(self):
-        return DEVICE_CLASS_HUMIDITY
+        return SensorDeviceClass..HUMIDITY
 
 
 class HomeSeerFanStateSensor(HomeSeerStatusSensor):
