@@ -25,22 +25,16 @@ from libhomeseer import (
     get_uom_from_status,
 )
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity,
-    SensorStateClass,
-)
+from homeassistant.components.sensor import SensorDeviceClass
+
 from homeassistant.const import (
-    EntityCategory,
-    UnitOfDataRate,
-    UnitOfInformation,
-    UnitOfPower,
-    UnitOfTemperature,
-    UnitOfElectricCurrent,
-    UnitOfEnergy,
-    UnitOfElectricPotential,
     LIGHT_LUX,
     PERCENTAGE,
+    UnitOfElectricCurrent,
+    UnitOfElectricPotential,
+    UnitOfEnergy,
+    UnitOfPower,
+    UnitOfTemperature,
 )
 
 from .const import DOMAIN

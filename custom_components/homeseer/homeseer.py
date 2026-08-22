@@ -7,8 +7,7 @@ from libhomeseer import (
     HomeSeerLockableDevice,
     HomeSeerDimmableDevice,
     get_datetime_from_last_change,
-    RELATIONSHIP_CHILD,
-    RELATIONSHIP_ROOT,
+    RELATIONSHIP_CHILD
 )
 import logging
 from typing import Optional, Union
@@ -27,8 +26,7 @@ from .const import (
     ATTR_STATUS,
     ATTR_DEVICE_TYPE_STRING,
     ATTR_LAST_CHANGE,
-    DEFAULT_INTERFACE_NAME,
-    DOMAIN,
+    DEFAULT_INTERFACE_NAME
 )
 from .homeseer_quirks import HOMESEER_QUIRKS
 
@@ -266,8 +264,7 @@ class HomeSeerEntity(Entity):
             "identifiers": {(self._bridge.namespace, parent.ref)},
             "name": f"{parent.location2} {parent.location} {parent.name}",
             "model": parent.device_type_string,
-            "manufacturer": parent.interface_name,
-            "via_device": (DOMAIN, self._bridge.namespace),
+            "manufacturer": parent.interface_name
         }
 
     @property

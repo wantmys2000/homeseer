@@ -1,0 +1,9 @@
+default_config:
+
+logger:
+  default: warning
+  logs:
+    custom_components.homeseer: warning          
+homeassistant:
+  time_zone: America/New_York
+

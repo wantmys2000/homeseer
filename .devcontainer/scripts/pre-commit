@@ -1,0 +1,11 @@
+#!/bin/bash
+# Sync strings.json to translations/en.json before every commit
+
+STRINGS="custom_components/ha-homeseer/strings.json"
+TRANSLATIONS="custom_components/ha-homeseer/translations/en.json"
+
+if [ -f "$STRINGS" ]; then
+    cp "$STRINGS" "$TRANSLATIONS"
+    git add "$TRANSLATIONS"
+    echo "✓ translations/en.json synced from strings.json"
+fi

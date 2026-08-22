@@ -4,8 +4,8 @@ import logging
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
-    SUPPORT_BRIGHTNESS,
-    LightEntity,
+    ColorMode,
+    LightEntity
 )
 
 from .const import DOMAIN
@@ -34,9 +34,17 @@ class HomeSeerLight(HomeSeerEntity, LightEntity):
     """Representation of a HomeSeer light-type device."""
 
     @property
-    def supported_features(self):
+    def DELETEME_supported_features(self):
         """Flag supported features."""
-        return SUPPORT_BRIGHTNESS
+        return ColorMode.BRIGHTNESS
+
+    @property
+    def color_mode(self):
+        return ColorMode.BRIGHTNESS
+
+    @property
+    def supported_color_modes(self) -> set[ColorMode]:
+        return {ColorMode.BRIGHTNESS}
 
     @property
     def brightness(self):

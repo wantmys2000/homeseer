@@ -5,6 +5,7 @@ For more details please refer to the documentation at https://github.com/marthoc
 
 import asyncio
 import logging
+from custom_components.homeseer.util import start_debugger
 import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
@@ -51,6 +52,12 @@ async def async_setup(hass, config):
 
 async def async_setup_entry(hass, config_entry):
     """Set up a HomeSeer config entry."""
+
+    ###
+    ### Start the Debugger
+    ###
+    await start_debugger(hass)
+
     config = config_entry.data
 
     host = config[CONF_HOST]
@@ -59,7 +66,7 @@ async def async_setup_entry(hass, config_entry):
     password = config[CONF_PASSWORD]
     http_port = config[CONF_HTTP_PORT]
     ascii_port = config[CONF_ASCII_PORT]
-    name_template = template.Template(str(config[CONF_NAME_TEMPLATE]))
+    name_template = template.Template(str(config[CONF_NAME_TEMPLATE]),hass)
     allow_events = config[CONF_ALLOW_EVENTS]
     allowed_event_groups = config[CONF_ALLOWED_EVENT_GROUPS]
     forced_covers = config[CONF_FORCED_COVERS]
@@ -108,10 +115,9 @@ async def async_setup_entry(hass, config_entry):
 
     hass.data[DOMAIN] = bridge
 
-    for platform in HOMESEER_PLATFORMS:
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(config_entry, platform)
-        )
+    hass.async_create_task(
+        hass.config_entries.async_forward_entry_setups(config_entry, HOMESEER_PLATFORMS)
+    )
 
     hass.bus.async_listen_once("homeassistant_stop", bridge.stop)
 

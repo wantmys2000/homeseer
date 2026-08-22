@@ -3,17 +3,12 @@
 import logging
 
 from homeassistant.components.cover import (
-    CoverEntity,
-    CoverEntityFeature,
-    ATTR_POSITION,
     CoverDeviceClass,
+    CoverEntityFeature,
+    CoverEntity,
+    ATTR_POSITION,
 )
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity,
-    SensorStateClass,
-)
 
 from .const import DOMAIN
 from .homeseer import HomeSeerEntity
@@ -96,7 +91,7 @@ class HomeSeerBlind(HomeSeerCover):
     @property
     def device_class(self):
         """Return the device class for the device."""
-        return SensorDeviceClass.BLIND
+        return CoverDeviceClass.BLIND
 
     @property
     def current_cover_position(self):

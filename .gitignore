@@ -117,3 +117,8 @@ dmypy.json
 
 bin
 pyvenv.cfg
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
